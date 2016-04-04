@@ -1,0 +1,8 @@
+rootProject.name = "socialman"
+
+include 'socialman-persistence'
+include 'socialman-data-generator'
+include 'socialman-domain'
+include 'socialman-rest-api'
+include 'socialman-web'
+

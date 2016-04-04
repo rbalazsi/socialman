@@ -1,0 +1,63 @@
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    compileJava {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    repositories {
+        mavenCentral()
+
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    ext.versions = [
+            junit          : '4.12',
+            spring         : '4.2.5.RELEASE',
+            spring_data_jpa: '1.9.4.RELEASE',
+            hibernate      : '5.1.0.Final',
+            h2: '1.4.191',
+            lombok         : '1.16.8',
+            commons_lang3  : '3.0',
+    ]
+
+    dependencies {
+        testCompile 'junit:junit:' + versions.junit
+
+        compile 'org.springframework:spring-core:' + versions.spring
+        compile 'org.springframework:spring-context:' + versions.spring
+        compile 'org.springframework:spring-beans:' + versions.spring
+        testCompile 'org.springframework:spring-test:' + versions.spring
+
+        testCompile 'com.h2database:h2:' + versions.h2
+        compile 'org.projectlombok:lombok:' + versions.lombok
+        compile 'org.apache.commons:commons-lang3:' + versions.commons_lang3
+    }
+
+    version = '1.0'
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}
+
+project('socialman-domain') {
+    dependencies {
+        compile 'org.hibernate:hibernate-core:' + versions.hibernate
+    }
+}
+
+project('socialman-persistence') {
+    dependencies {
+        compile project(':socialman-domain')
+
+        compile 'org.springframework:spring-orm:' + versions.spring
+        compile 'org.springframework.data:spring-data-jpa:' + versions.spring_data_jpa
+        compile 'org.hibernate:hibernate-core:' + versions.hibernate
+        compile 'org.hibernate:hibernate-entitymanager:' + versions.hibernate
+    }
+}
