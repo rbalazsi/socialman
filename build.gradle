@@ -20,9 +20,10 @@ subprojects {
             spring         : '4.2.5.RELEASE',
             spring_data_jpa: '1.9.4.RELEASE',
             hibernate      : '5.1.0.Final',
-            h2: '1.4.191',
+            h2             : '1.4.191',
             lombok         : '1.16.8',
             commons_lang3  : '3.0',
+            guava          : '19.0'
     ]
 
     dependencies {
@@ -36,6 +37,7 @@ subprojects {
         testCompile 'com.h2database:h2:' + versions.h2
         compile 'org.projectlombok:lombok:' + versions.lombok
         compile 'org.apache.commons:commons-lang3:' + versions.commons_lang3
+        compile 'com.google.guava:guava:' + versions.guava
     }
 
     version = '1.0'
@@ -56,8 +58,20 @@ project('socialman-persistence') {
         compile project(':socialman-domain')
 
         compile 'org.springframework:spring-orm:' + versions.spring
-        compile 'org.springframework.data:spring-data-jpa:' + versions.spring_data_jpa
         compile 'org.hibernate:hibernate-core:' + versions.hibernate
         compile 'org.hibernate:hibernate-entitymanager:' + versions.hibernate
     }
 }
+
+/*
+TODO: Reactivate when switching to Spring Data JPA
+project('socialman-pers-spring-data-jpa') {
+    dependencies {
+        compile project(':socialman-domain')
+
+        compile 'org.springframework:spring-orm:' + versions.spring
+        compile 'org.springframework.data:spring-data-jpa:' + versions.spring_data_jpa
+        compile 'org.hibernate:hibernate-core:' + versions.hibernate
+        compile 'org.hibernate:hibernate-entitymanager:' + versions.hibernate
+    }
+}*/

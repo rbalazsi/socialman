@@ -1,11 +1,11 @@
 package org.socialman.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -13,14 +13,14 @@ import javax.persistence.MappedSuperclass;
  * Created by robi on 4/3/16.
  */
 @MappedSuperclass
-public abstract class BaseEntity<T> {
+public abstract class AbstractEntity<T> {
 
     @Id
-    @Getter(AccessLevel.PUBLIC)
-    @GeneratedValue
+    @Getter
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected T id;
 
-    public BaseEntity() {
+    public AbstractEntity() {
         // for JPA
     }
 
@@ -28,7 +28,7 @@ public abstract class BaseEntity<T> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BaseEntity that = (BaseEntity) o;
+        AbstractEntity that = (AbstractEntity) o;
 
         return new EqualsBuilder().append(id, that.id).isEquals();
     }
