@@ -23,7 +23,8 @@ subprojects {
             h2             : '1.4.191',
             lombok         : '1.16.8',
             commons_lang3  : '3.0',
-            guava          : '19.0'
+            guava          : '19.0',
+            validation_api : '1.1.0.Final'
     ]
 
     dependencies {
@@ -38,6 +39,8 @@ subprojects {
         compile 'org.projectlombok:lombok:' + versions.lombok
         compile 'org.apache.commons:commons-lang3:' + versions.commons_lang3
         compile 'com.google.guava:guava:' + versions.guava
+        compile 'javax.validation:validation-api:' + versions.validation_api
+
     }
 
     version = '1.0'

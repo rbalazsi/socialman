@@ -25,8 +25,8 @@ public class UserRepositoryTest extends AbstractTransactionalJUnit4SpringContext
     public void shouldPersistUser() {
         User user = new User("rbalazsi", "securePass", "Robert", "Balazsi");
         user.addPost(new Post(user, PostType.POST, "This is a sample post", null));
-        userRepository.store(user);
+        userRepository.save(user);
 
-        assertNotNull(user.getId());
+        assertNotNull(user.getPosts().get(0).getId());
     }
 }

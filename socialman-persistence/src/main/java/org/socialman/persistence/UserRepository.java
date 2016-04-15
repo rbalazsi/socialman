@@ -1,7 +1,15 @@
 package org.socialman.persistence;
 
+
 import org.socialman.domain.User;
 
+public interface UserRepository {
 
-public interface UserRepository extends Repository<User, Long> {
+    User findByUserName(String userName);
+
+    void save(User user);
+
+    void update(User user);
+
+    void delete(User user);
 }

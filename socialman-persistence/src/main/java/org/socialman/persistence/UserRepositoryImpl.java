@@ -2,10 +2,32 @@ package org.socialman.persistence;
 
 import org.socialman.domain.User;
 
-@org.springframework.stereotype.Repository
-public class UserRepositoryImpl extends AbstractRepository<User, Long> implements UserRepository {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-    public UserRepositoryImpl() {
-        super(User.class);
+@org.springframework.stereotype.Repository
+public class UserRepositoryImpl implements UserRepository {
+
+    @PersistenceContext
+    private EntityManager em;
+
+    @Override
+    public User findByUserName(String userName) {
+        return em.find(User.class, userName);
+    }
+
+    @Override
+    public void save(User user) {
+        em.persist(user);
+    }
+
+    @Override
+    public void update(User user) {
+        em.merge(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        em.remove(user);
     }
 }
